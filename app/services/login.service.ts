@@ -1,33 +1,38 @@
 import { Injectable }               from '@angular/core';
 import { Http, Response }           from '@angular/http';
 import { Headers, RequestOptions }  from '@angular/http';
+import                               '../rxjs-extensions';
 
 @Injectable()
 export class LoginService {
     private host = 'http://localhost:3000';
     private loginUrl = '/login';
-    private username = 'ssh';
-    private password = 'homework';
 
     constructor (private http: Http) {}
   
-    getToken(): Promise<Response> {
+    getToken(settings: any): Promise<Response> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         let body = JSON.stringify({
-            username: this.username,
-            password: this.password
+            username: settings.username,
+            password: settings.password
         });
 
         return this.http.post(this.host + this.loginUrl, body, options)
             .toPromise()
-            .then(this.extractData)
+            .then(this.extractToken)
+            .then(this.saveToken)
             .catch(this.handleError);
     }
 
-    private extractData(res: Response) {
+    private extractToken(res: Response): Promise<Response> {
         let body = res.json();
-        return body.token || { };
+        return body.token || {};
+    }
+
+    private saveToken(token: Response): Promise<Response> {
+        window.localStorage.setItem('token', 'Bearer ' + token);
+        return;
     }
 
     private handleError (error: any) {

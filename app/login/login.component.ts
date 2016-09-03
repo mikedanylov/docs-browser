@@ -10,16 +10,43 @@ import { LoginService }         from '../services/login.service';
     styleUrls: ['app/login/login.component.css']
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent {
+    private title = 'Log In';
     private token: string;
+    private formUsername: string;
+    private formPassword: string;
 
     constructor(
         private router: Router,
         private loginService: LoginService) {
     }
 
-    ngOnInit(): void {
-        this.loginService.getToken()
-            .then(token => this.token);
+    syncName(event: any): void {
+        this.formUsername = event.target.value;
+    }
+
+    syncPassword(event: any): void {
+        this.formPassword = event.target.value;
+    }
+
+    logIn(): void {
+        let self = this;
+
+        if (!this.formUsername || !this.formPassword) {
+            throw new Error('login.component: Username or password is missing');
+        }
+
+        this.loginService.getToken({
+            username: this.formUsername,
+            password: this.formPassword
+        })
+        .then(() => {
+            self.gotoDocuments();
+        })
+        .catch(err => console.log(err));
+    }
+
+    gotoDocuments(): void {
+        this.router.navigate(['/documents']);
     }
 }
