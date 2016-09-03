@@ -7,6 +7,7 @@ import                               './rxjs-extensions';
 import { AppComponent }         from './app.component';
 import { routing }              from './app.routing';
 import { LoginService }         from './services/login.service';
+import { DocumentService }      from './services/document.service';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { LoginService }         from './services/login.service';
     AppComponent
   ],
   providers: [
-    LoginService
+    LoginService,
+    DocumentService
   ],
   bootstrap: [AppComponent]
 })
