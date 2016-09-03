@@ -4,7 +4,7 @@ import { Headers, RequestOptions }  from '@angular/http';
 
 @Injectable()
 export class LoginService {
-    private host = 'localhost:3000';
+    private host = 'http://localhost:3000';
     private loginUrl = '/login';
     private username = 'ssh';
     private password = 'homework';
@@ -27,7 +27,7 @@ export class LoginService {
 
     private extractData(res: Response) {
         let body = res.json();
-        return body.data || { };
+        return body.token || { };
     }
 
     private handleError (error: any) {

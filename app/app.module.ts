@@ -13,7 +13,7 @@ import { LoginService }         from './services/login.service';
     BrowserModule,
     FormsModule,
     HttpModule,
-    // routing
+    routing
   ],
   declarations: [
     AppComponent
