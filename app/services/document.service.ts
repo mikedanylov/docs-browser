@@ -1,38 +1,53 @@
 import { Injectable }               from '@angular/core';
 import { Http, Response }           from '@angular/http';
 import { Headers, RequestOptions }  from '@angular/http';
-import '../rxjs-extensions';
-
-import { LoginService }             from './login.service';
+import                                   '../rxjs-extensions';
 import { Document }                 from '../document';
+import { DOMAIN, API_URLS }         from '../constants';
 
 @Injectable()
 export class DocumentService {
-    private host = 'http://localhost:3000';
-    private loginUrl = '/documents';
 
-    constructor(private http: Http,
-        private loginService: LoginService) {
-
+    constructor(private http: Http) {
     }
 
-    getAllDocuments(token: string): Promise<Response> {
-        let headers = new Headers({
-            'Content-Type': 'application/json',
-            'Authentication': token
+    getAllDocuments(token: string): Promise<any> {
+        let headers = new Headers();
+        
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', token);
+        
+        let options = new RequestOptions({
+            headers: headers,
+            body: ''
         });
-        let options = new RequestOptions({ headers: headers });
 
-        return this.http.get(this.host + this.loginUrl, options)
+        return this.http.get(DOMAIN + API_URLS.DOCUMENTS, options)
             .toPromise()
-            .then(this.extractDocuments)
+            .then(this.extractData)
             .catch(this.handleError);
     }
 
-    private extractDocuments(res: Response): Promise<any> {
-        let docs: Document[];
+    getDocument(token: string, docId: number): Promise<any> {
+        let headers = new Headers();
+        
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', token);
+        
+        let options = new RequestOptions({
+            headers: headers,
+            body: ''
+        });
 
-        return Promise.resolve(docs);
+        return this.http.get(DOMAIN + API_URLS.DOCUMENT + docId, options)
+            .toPromise()
+            .then(this.extractData)
+            .catch(this.handleError);
+    }
+
+    private extractData(res: Response) {
+        let body = res.json();
+        return body || {};
     }
 
     private handleError (error: any) {

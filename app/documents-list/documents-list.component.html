@@ -1,0 +1,10 @@
+<h2>Documets List</h2>
+
+<ul id="documents-list">
+    <li *ngFor="let document of documents" (click)="onClick(document)">
+        <span><i class="fa fa-file-text-o" aria-hidden="true"></i></span>
+        <span>{{document.name}}</span>
+        <a href="{{document._links[0].href}}">Open</a>
+        <a href="{{document._links[1].href}}">Download</a>
+    </li>
+</ul>

@@ -2,6 +2,8 @@ import { ModuleWithProviders }      from '@angular/core';
 import { Routes, RouterModule }     from '@angular/router';
 
 import { LoginComponent }           from './login/login.component';
+import { DocumentsListComponent }
+    from './documents-list/documents-list.component';
 
 const appRoutes: Routes = [
     {
@@ -12,6 +14,10 @@ const appRoutes: Routes = [
     {
         path: 'login',
         component: LoginComponent
+    },
+    {
+        path: 'documents',
+        component: DocumentsListComponent
     }
 ];
 

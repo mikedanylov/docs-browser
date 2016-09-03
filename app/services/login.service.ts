@@ -25,6 +25,16 @@ export class LoginService {
             .catch(this.handleError);
     }
 
+    getLocalToken(): string {
+        let token = window.localStorage.getItem('token');
+        
+        if (!token) {
+            return;
+        }
+        
+        return token;
+    }
+
     private extractToken(res: Response): Promise<Response> {
         let body = res.json();
         return body.token || {};
