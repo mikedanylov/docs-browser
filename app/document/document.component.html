@@ -1,7 +1,12 @@
-<h2 class="page-heading" (click)="onClick()">Document</h2>
+<h2 class="page-heading">Document</h2>
 <div class="container">
     <div *ngIf="document">
-        <h3 class="page-heading">{{document.name}}</h3>
-        <pre class="doc-content">{{document.content}}</pre>
+        <div *ngIf="document.content">
+            
+            <!--<text-highlight></text-highlight>-->
+
+            <h3 class="page-heading">{{document.name}}</h3>
+            <pre class="doc-content">{{document.content}}</pre>
+        </div>
     </div>
 </div>

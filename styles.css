@@ -60,3 +60,6 @@ div.pagination > div > a {
     text-transform: uppercase;
     border-bottom: 2px solid #1bbbef;
 }
+span.highlight {
+    background-color: aquamarine;
+}
