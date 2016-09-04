@@ -1,3 +1,36 @@
-ul#documents-list {
-    list-style: none;
+#documents-list li {
+    padding: 10px;
+    border-bottom: 1px solid rgba(70, 119, 167, 0.23);
+}
+#documents-list div {
+    display: inline-block;
+}
+i.fa.fa-file-text-o, i.fa.fa-eye {
+    font-size: 24px;
+}
+i.fa.fa-file-text-o, i.fa.fa-eye {
+    color: rgb(70, 119, 167);
+}
+i.fa.fa-eye:hover {
+    color: rgb(7, 213, 229);
+}
+div.file-icon {
+    width: 11%;
+    text-align: center;
+}
+div.doc-name {
+    width: 78%;
+    overflow: hidden;
+    height: 16px;
+}
+div.doc-name a {
+    color: black;
+    text-decoration: none;
+}
+div.doc-name a:hover {
+    text-decoration: underline;
+}
+.open-icon {
+    width: 8%;
+    text-align: center;
 }

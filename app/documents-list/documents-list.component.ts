@@ -24,11 +24,14 @@ export class DocumentsListComponent implements OnInit {
     
     private getDocuments() {
         let token;
+        let self = this;
 
         if (this.loginService.isValidToken()) {
             token = this.loginService.getLocalToken();
             this.documentService.getAllDocuments(token)
-                .then(docs => this.documents = docs);
+                .then((docs) => {
+                    self.normalizeDocs(docs);
+                });
         } else {
             this.loginService.getToken({
                 username: (jwt_decode(localStorage.getItem('token'))).username,
@@ -37,9 +40,22 @@ export class DocumentsListComponent implements OnInit {
             .then(() => {
                 token = this.loginService.getLocalToken();
                 this.documentService.getAllDocuments(token)
-                    .then(docs => this.documents = docs);
+                    .then((docs) => {
+                        self.normalizeDocs(docs);
+                    });
             });
         }
+    }
+
+    private normalizeDocs(docs: Document[]) {
+        this.documents = docs.map(doc => {
+            return this.parseDocName(doc);
+        });
+    }
+
+    private parseDocName(doc: Document): Document {
+        doc.name = doc.name.replace(/_|-/g, ' ');
+        return doc;
     }
 
     ngOnInit(): void {

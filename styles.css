@@ -1,23 +1,62 @@
-/* Master Styles */
-h1 {
-  color: #369;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 250%;
-}
-h2, h3 {
-  color: #444;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: lighter;
-}
 body {
-  margin: 2em;
+    font-family: Arial, Helvetica, sans-serif;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
 }
-body, input[text], button {
-  color: #888;
-  font-family: Cambria, Georgia;
+div.container {
+    padding: 20px;
 }
-/* . . . */
-/* everywhere else */
-* {
-  font-family: Arial, Helvetica, sans-serif;
+div.container {
+    border-radius: 10px;
+    border: 1px solid rgba(70, 119, 167, 0.23);
+}
+@media screen and (min-width: 800px) {
+    div.container {
+        padding: 20px 60px;
+        width: 680px;
+        margin: 0 auto;
+    }
+}
+.list-no-decoration {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+div.pagination {
+    padding: 50px 0 0;
+    width: 100%;
+    text-align: center;
+}
+div.pagination > div {
+    display: inline-block;
+    color: #1bbbef;
+    text-decoration: none;
+    padding: 0.5em 1.5em;
+    border: 1px solid #1bbbef;
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+}
+div.pagination > div > a {
+    color: #1bbbef;
+    text-decoration: none;
+}
+.page-heading {
+    text-align: center;
+    color: rgb(70, 119, 167);
+}
+.navbar {
+    height: 50px;
+    text-align: center;
+}
+.navbar a {
+    text-transform: uppercase;
+    vertical-align: middle;
+    text-decoration: none;
+    color: black;
+    margin: 0 10px 0;
+}
+.navbar a:hover {
+    text-transform: uppercase;
+    border-bottom: 2px solid #1bbbef;
 }

@@ -1,18 +1,7 @@
-<h2 (click)="onClick()">Document</h2>
-<div *ngIf="document">
-    <h3>{{document.name}}</h3>
-    <pre class="doc-content">{{document.content}}</pre>
+<h2 class="page-heading" (click)="onClick()">Document</h2>
+<div class="container">
+    <div *ngIf="document">
+        <h3 class="page-heading">{{document.name}}</h3>
+        <pre class="doc-content">{{document.content}}</pre>
+    </div>
 </div>
-
-<!--<ul id="documents-list">
-    <li *ngFor="let document of documents" (click)="onClick(document)">
-        <span><i class="fa fa-file-text-o" aria-hidden="true"></i></span>
-        <span>{{document.name}}</span>
-        <a href="{{document._links[0].href}}">
-            <span><i class="fa fa-eye" aria-hidden="true"></i></span>
-        </a>
-        <a href="{{document._links[1].href}}" target="_blank">
-            <span><i class="fa fa-download" aria-hidden="true"></i></span>
-        </a>
-    </li>
-</ul>-->

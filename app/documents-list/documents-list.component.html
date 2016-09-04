@@ -1,14 +1,25 @@
-<h2>Documents List</h2>
+<h2 class="page-heading">Documents List</h2>
 
-<ul id="documents-list">
-    <li *ngFor="let document of documents" (click)="onClick(document)">
-        <span><i class="fa fa-file-text-o" aria-hidden="true"></i></span>
-        <span>{{document.name}}</span>
-        <a href="{{document._links[0].href}}">
-            <span><i class="fa fa-eye" aria-hidden="true"></i></span>
-        </a>
-        <a href="{{document._links[1].href}}" target="_blank">
-            <span><i class="fa fa-download" aria-hidden="true"></i></span>
-        </a>
-    </li>
-</ul>
+<div class="container">
+    <ul id="documents-list" class="list-no-decoration">
+        <li *ngFor="let document of documents" (click)="onClick(document)">
+            <div class="file-icon">
+                <i class="fa fa-file-text-o" aria-hidden="true"></i>
+            </div>
+            <div class="doc-name">
+                <a href="{{document._links[0].href}}">{{document.name}}</a>
+            </div>
+            <div class="open-icon">
+                <a href="{{document._links[0].href}}">
+                    <i class="fa fa-eye" aria-hidden="true"></i>
+                </a>
+            </div>
+        </li>
+    </ul>
+
+    <div class="pagination">
+        <div><a href="#">« Previous</a></div>
+        <div><a href="#">Next »</a></div>
+        <p>Showing 1 - 6 of 8 total items</p>
+    </div>
+</div>
