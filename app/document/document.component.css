@@ -4,4 +4,12 @@ pre.doc-content {
     white-space: -pre-wrap;      /* Opera 4-6 */
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
+
+    font-family: Georgia, serif;
+    font-size: 17px;
+    line-height: 24px;
+    background-color: #eee;
+    border-radius: 5px;
+    padding: 10px;
+    color: #444;
 }
