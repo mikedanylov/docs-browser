@@ -29,9 +29,16 @@ export class LoginComponent {
         this.formPassword = event.target.value;
     }
 
+    updateForm() {
+        let inputs = <HTMLInputElement[]><any>document.querySelectorAll('input');
+        this.formUsername = inputs[0].value;
+        this.formPassword = inputs[1].value;
+    }
+
     logIn(): void {
         let self = this;
 
+        this.updateForm();
         if (!this.formUsername || !this.formPassword) {
             throw new Error('login.component: Username or password is missing');
         }

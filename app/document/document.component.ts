@@ -6,6 +6,8 @@ import { Document }                 from '../document';
 import { LoginService }             from '../services/login.service';
 import { DocumentService }          from '../services/document.service';
 
+declare var jwt_decode: any;
+
 @Component({
     selector: 'document',
     templateUrl: 'app/document/document.component.html',
@@ -44,7 +46,6 @@ export class DocumentComponent implements OnInit {
                 this.documentService.getDocumentContent(token, docId)
             ])
             .then((vals) => {
-                console.log(vals);
                 self.appendDocumentContent(vals);
             });
         });

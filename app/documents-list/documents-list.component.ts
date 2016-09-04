@@ -5,6 +5,8 @@ import { Document }             from '../document';
 import { LoginService }         from '../services/login.service';
 import { DocumentService }      from '../services/document.service';
 
+declare var jwt_decode: any;
+
 @Component({
     selector: 'documents-list',
     templateUrl: 'app/documents-list/documents-list.component.html',

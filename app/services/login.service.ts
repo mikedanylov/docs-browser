@@ -4,6 +4,8 @@ import { Headers, RequestOptions }  from '@angular/http';
 import                               '../rxjs-extensions';
 import { DOMAIN, API_URLS }         from '../constants';
 
+declare var jwt_decode: any;
+
 @Injectable()
 export class LoginService {
 
@@ -40,7 +42,7 @@ export class LoginService {
         let expirationTime;
         let valid;
 
-        expirationTime = new Date((window.jwt_decode(localStorage.getItem('token'))).exp * 1000); 
+        expirationTime = new Date((jwt_decode(localStorage.getItem('token'))).exp * 1000); 
         valid = expirationTime.getTime() - new Date().getTime();
         
         return valid > 0;
