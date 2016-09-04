@@ -20,18 +20,31 @@ export class DocumentsListComponent implements OnInit {
         private documentService: DocumentService) {
         }
     
-    private getDocuments(): Promise<any> {
-        let token = this.loginService.getLocalToken();
+    private getDocuments() {
+        let token;
 
-        if (!token) {
-            this.gotoLogin();
+        if (this.loginService.isValidToken()) {
+            token = this.loginService.getLocalToken();
+            this.documentService.getAllDocuments(token)
+                .then(docs => this.documents = docs);
+        } else {
+            this.loginService.getToken({
+                username: (jwt_decode(localStorage.getItem('token'))).username,
+                password: window.localStorage.getItem('pwd')
+            })
+            .then(() => {
+                token = this.loginService.getLocalToken();
+                this.documentService.getAllDocuments(token)
+                    .then(docs => this.documents = docs);
+            });
         }
-
-        return this.documentService.getAllDocuments(token)
-            .then(docs => this.documents = docs);
     }
 
     ngOnInit(): void {
+        if (!this.loginService.isToken()) {
+            this.gotoLogin();
+        }
+
         this.getDocuments();
     }
 

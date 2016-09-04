@@ -2,11 +2,10 @@ import { Injectable }               from '@angular/core';
 import { Http, Response }           from '@angular/http';
 import { Headers, RequestOptions }  from '@angular/http';
 import                               '../rxjs-extensions';
+import { DOMAIN, API_URLS }         from '../constants';
 
 @Injectable()
 export class LoginService {
-    private host = 'http://localhost:3000';
-    private loginUrl = '/login';
 
     constructor (private http: Http) {}
   
@@ -18,7 +17,11 @@ export class LoginService {
             password: settings.password
         });
 
-        return this.http.post(this.host + this.loginUrl, body, options)
+        // for development only ##################################
+        window.localStorage.setItem('pwd', settings.password);
+        // #######################################################
+
+        return this.http.post(DOMAIN + API_URLS.LOGIN, body, options)
             .toPromise()
             .then(this.extractToken)
             .then(this.saveToken)
@@ -26,13 +29,21 @@ export class LoginService {
     }
 
     getLocalToken(): string {
-        let token = window.localStorage.getItem('token');
+        return 'Bearer ' + localStorage.getItem('token'); 
+    }
+
+    isToken(): boolean {
+        return localStorage.getItem('token');
+    }
+    
+    isValidToken(): boolean {
+        let expirationTime;
+        let valid;
+
+        expirationTime = new Date((window.jwt_decode(localStorage.getItem('token'))).exp * 1000); 
+        valid = expirationTime.getTime() - new Date().getTime();
         
-        if (!token) {
-            return;
-        }
-        
-        return token;
+        return valid > 0;
     }
 
     private extractToken(res: Response): Promise<Response> {
@@ -41,7 +52,7 @@ export class LoginService {
     }
 
     private saveToken(token: Response): Promise<Response> {
-        window.localStorage.setItem('token', 'Bearer ' + token);
+        window.localStorage.setItem('token', token.toString());
         return;
     }
 
